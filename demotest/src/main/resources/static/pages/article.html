@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>博客首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap3/font-awesome-4.7.0/css/font-awesome.css" />
+		<!-- 自定义样式 -->
+		<link rel="stylesheet" type="text/css" href="css/layout3.css" />
+	</head>
+
+	<body>
+		<!--网页最上方的留白-->
+		<header>
+			<!-- class.container 容器定位 的作用是进行居中布局 -->
+			<div class="container">
+				<!-- pull-right 向右对齐  -->
+				<span class="pull-right"><small>Power by</small> <b>Smart</b>Blogs</span>
+			</div>
+		</header>
+		<!--网页 导航栏 在layout.css 文件中设置在背景图片-->
+		<nav>
+			<!-- class.container 容器定位 用于设置内容居中 -->
+			<div class="container">
+				<h1>
+        <b>popo酱的博客</b> <small>——po就是主子，我是po奴才</small>
+      </h1>
+
+				<!--导航栏-->
+				<div>
+					<!-- class="nav navbar-nav" 定义导航条 -->
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">首页</a></li>
+						<li><a href="list.html">文章</a></li>
+					</ul>
+					<!-- class="nav navbar-nav" 定义导航条 向右侧浮动 -->
+					<ul class="nav navbar-nav navbar-right">
+						<!-- 导航条中的文字使用 class="navbar-text" 样式 -->
+						<li><span class="navbar-text">用户：admin</span></li>
+						<li><a href="login.html">登出</a></li>
+					</ul>
+				</div>
+				<!-- /导航栏 -->
+			</div>
+		</nav>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+						<!--文章标题-->
+						<h2 class="page-header">
+							《我不是药神》观后的反思
+						</h2>
+						<!--文章信息-->
+						<div class="gray">
+							<span>admin最后修改于2018-11-23 11:06</span>
+							<span class="pull-right"> 
+								<span class="fa fa-eye"></span> 13
+							<span class="fa fa-comment-o"></span> 4
+							</span>
+						</div>
+						<!--文章配图-->
+						<img src="../imagesTemp/img1.jpg" class="img-rounded img-responsive center-block" />
+						<!--文章正文-->
+					</div>
+				</div>
+			</div>
+	</body>
+	<script type="text/javascript" src="bootstrap3/jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/holder.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/html5shiv.min.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/css3-mediaqueries.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/respond.min.js"></script>
+
+</html>

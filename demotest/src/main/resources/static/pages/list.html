@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>博客首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap3/font-awesome-4.7.0/css/font-awesome.css" />
+		<!-- 自定义样式 -->
+		<link rel="stylesheet" type="text/css" href="css/layout3.css" />
+	</head>
+
+	<body>
+		<!--网页 导航栏 在layout.css 文件中设置在背景图片-->
+		<nav>
+			<!-- class.container 容器定位 用于设置内容居中 -->
+			<div class="container">
+				<h1>
+        			<b>一个博客</b> <small>——博客列表</small>
+      			</h1>
+				<!--导航栏-->
+				<div>
+					<!-- class="nav navbar-nav" 定义导航条 -->
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">首页</a></li>
+						<li><a href="list.html">文章</a></li>
+					</ul>
+					<!-- class="nav navbar-nav" 定义导航条 向右侧浮动 -->
+					<ul class="nav navbar-nav navbar-right">
+						<!-- 导航条中的文字使用 class="navbar-text" 样式 -->
+						<li><span class="navbar-text">用户：<b id="bName">name</b> </span></li>
+						<li><a href="login.html">登出</a></li>
+					</ul>
+				</div>
+				<!-- /导航栏 -->
+			</div>
+		</nav>
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<!--左侧主要内容-->
+					<h2 class="page-header">
+						<span class="fa fa-list"></span> 文章列表
+					</h2>
+					<div class="col-md-9" id="contentId">
+
+						<!--第一篇-->
+
+					</div>
+					<!--左侧内容结束-->
+				</div>
+			</div>
+		</section>
+		<!--网页底部， class.well 用于设置背景效果-->
+		<footer>
+			<div class="container">
+				<div class="text-center">
+					这里是页脚，我想写啥就写啥
+					<br /> 没有备案
+					<a target="_blank" href="https://www.github.com/">广告为招租</a> 开源开源没有版权
+				</div>
+			</div>
+		</footer>
+
+	</body>
+	<script type="text/javascript" src="bootstrap3/jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/holder.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/html5shiv.min.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/css3-mediaqueries.js"></script>
+	<script type="text/javascript" src="bootstrap3/js/respond.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+	<script type="text/html" id="tplArticle">
+		{{each dataList}}
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row1" id="{{$value.oId}}">
+					<div class="col-md-8">
+						<h3 class="row-1">
+							<a href="article.html">{{$value.title}}</a>
+						</h3>
+						<p class="row-5">
+							{{$value.content}}
+						</p>
+					</div>
+					<div class="col-md-4">
+						<img src="../images/{{$value.imgName}}" class="img-rounded img-responsive" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-md-3">
+						<span class="fa fa-calendar"></span> {{$value.created}}
+					</div>
+					<div class="col-md-2">
+						<span class="fa fa-eye"></span> {{$value.viewCount}}
+					</div>
+					<div class="col-md-2">
+						<span class="fa fa-comment-o"></span> {{$value.commentCount}}
+					</div>
+					<div class="col-md-3">
+						<a class="btn btn-info btn-xs" href="list.html">歌曲</a>
+						<a class="btn btn-info btn-xs" href="list.html">手机</a>
+						<a class="btn btn-info btn-xs" href="list.html">耳机</a>
+					</div>
+					<div class="col-md-2">
+						<span class="pull-right">{{$value.authorId}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<script>
+		$(function () {
+
+			//获取用户名
+			$.ajax({
+				url:"http://localhost:8080/user/info",
+				method:"GET",
+				headers: {
+					'Authorization' : $.cookie('token')
+				},
+				success:function (sce) {
+					if(sce.code === 200){
+						console.log(sce)
+						$('#bName')[0].innerText = sce.data.userName
+					}
+				}
+			})
+
+			//渲染数据
+
+			$.ajax({
+				url:"http://localhost:8080/article/all",
+				method: "GET",
+				headers: {
+					'Authorization' : $.cookie('token')
+				},
+				success: function (sce) {
+					if(sce.code === 200){
+						var HtmlData = {
+							dataList: sce.data
+						}
+						var htmlStr = template('tplArticle',HtmlData)
+						// console.log(htmlStr)
+						$('#contentId')[0].innerHTML = htmlStr
+					}
+				}
+			})
+
+			$('.row1').on("click",function (e) {
+				e.preventDefault()
+				console.log("点击")
+				$.cookie('pg',this.pg)
+				console.log($.cookie('pg'))
+			})
+
+		})
+	</script>
+
+</html>
